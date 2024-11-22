@@ -1,89 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const DocumentUpload = ({ formData, onChange }) => {
-  const [errors, setErrors] = useState({
-    idDocument: '',
-    addressProof: '',
-    taxId: ''
-  });
-
-  // Maximum file size (5MB)
-  const MAX_FILE_SIZE = 5 * 1024 * 1024;
-  
-  // Allowed file types
-  const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'application/pdf'];
-
-  const validateFile = (file) => {
-    if (!file) return 'File is required';
-    
-    if (!ALLOWED_TYPES.includes(file.type)) {
-      return 'Invalid file type. Please upload a PDF, JPG, or PNG file';
-    }
-    
-    if (file.size > MAX_FILE_SIZE) {
-      return 'File size exceeds 5MB limit';
-    }
-    
-    return '';
-  };
-
-  const validateTaxId = (value) => {
-    // Basic US SSN validation (XXX-XX-XXXX)
-    const ssnPattern = /^\d{3}-?\d{2}-?\d{4}$/;
-    if (!value) return 'Tax ID is required';
-    if (!ssnPattern.test(value.replace(/-/g, ''))) {
-      return 'Please enter a valid Tax ID number';
-    }
-    return '';
-  };
-
+const DocumentUpload = ({ formData, onChange, errors }) => {
   const handleFileChange = (name, file) => {
-    const error = validateFile(file);
-    setErrors(prev => ({
-      ...prev,
-      [name]: error
-    }));
+    // Maximum file size (5MB)
+    const MAX_FILE_SIZE = 5 * 1024 * 1024;
+    const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'application/pdf'];
 
-    if (!error) {
-      onChange(name, file);
+    if (file) {
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        onChange(`${name}Error`, 'Invalid file type. Please upload a PDF, JPG, or PNG file');
+        return;
+      }
+      
+      if (file.size > MAX_FILE_SIZE) {
+        onChange(`${name}Error`, 'File size exceeds 5MB limit');
+        return;
+      }
     }
+
+    onChange(name, file);
+    // Clear any existing error
+    onChange(`${name}Error`, '');
+  };
+
+  const formatTaxId = (value) => {
+    // Remove all non-digits
+    const numbers = value.replace(/\D/g, '');
+    
+    // Format as XXX-XX-XXXX
+    if (numbers.length >= 9) {
+      return `${numbers.slice(0, 3)}-${numbers.slice(3, 5)}-${numbers.slice(5, 9)}`;
+    } else if (numbers.length >= 5) {
+      return `${numbers.slice(0, 3)}-${numbers.slice(3, 5)}-${numbers.slice(5)}`;
+    } else if (numbers.length >= 3) {
+      return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
+    }
+    return numbers;
   };
 
   const handleTaxIdChange = (e) => {
-    const value = e.target.value;
-    const error = validateTaxId(value);
-    setErrors(prev => ({
-      ...prev,
-      taxId: error
-    }));
-
-    // Format SSN as user types (XXX-XX-XXXX)
-    let formattedValue = value.replace(/\D/g, '');
-    if (formattedValue.length >= 5) {
-      formattedValue = `${formattedValue.slice(0,3)}-${formattedValue.slice(3,5)}-${formattedValue.slice(5,9)}`;
-    } else if (formattedValue.length >= 3) {
-      formattedValue = `${formattedValue.slice(0,3)}-${formattedValue.slice(3)}`;
-    }
-
+    const formattedValue = formatTaxId(e.target.value);
     onChange('taxId', formattedValue);
-  };
-
-  const renderFilePreview = (file) => {
-    if (!file) return null;
-
-    if (file.type === 'application/pdf') {
-      return <p className="file-preview">PDF Document: {file.name}</p>;
-    }
-
-    return (
-      <div className="file-preview">
-        <img 
-          src={URL.createObjectURL(file)} 
-          alt="Document preview" 
-          style={{ maxWidth: '200px', maxHeight: '200px' }}
-        />
-      </div>
-    );
   };
 
   return (
@@ -96,16 +53,19 @@ const DocumentUpload = ({ formData, onChange }) => {
           type="file"
           id="idDocument"
           onChange={(e) => handleFileChange('idDocument', e.target.files[0])}
-          accept={ALLOWED_TYPES.join(',')}
-          required
+          accept="image/*,.pdf"
+          className={errors?.idDocument ? 'error' : ''}
         />
-        {errors.idDocument && (
-          <span className="error-message">{errors.idDocument}</span>
+        {errors?.idDocument && (
+          <div className="error-message">{errors.idDocument}</div>
         )}
-        {formData.idDocument && renderFilePreview(formData.idDocument)}
+        {formData.idDocument && (
+          <div className="file-preview">
+            Selected file: {formData.idDocument.name}
+          </div>
+        )}
         <small>
-          Accepted formats: PDF, JPG, PNG (Max size: 5MB)<br />
-          Please ensure your document is clearly visible and all details are legible
+          Accepted formats: PDF, JPG, PNG (Max size: 5MB)
         </small>
       </div>
 
@@ -115,16 +75,20 @@ const DocumentUpload = ({ formData, onChange }) => {
           type="file"
           id="addressProof"
           onChange={(e) => handleFileChange('addressProof', e.target.files[0])}
-          accept={ALLOWED_TYPES.join(',')}
-          required
+          accept="image/*,.pdf"
+          className={errors?.addressProof ? 'error' : ''}
         />
-        {errors.addressProof && (
-          <span className="error-message">{errors.addressProof}</span>
+        {errors?.addressProof && (
+          <div className="error-message">{errors.addressProof}</div>
         )}
-        {formData.addressProof && renderFilePreview(formData.addressProof)}
+        {formData.addressProof && (
+          <div className="file-preview">
+            Selected file: {formData.addressProof.name}
+          </div>
+        )}
         <small>
-          Accepted documents: Utility bill, Bank statement, Government-issued document<br />
-          Document must be less than 3 months old
+          Accepted formats: PDF, JPG, PNG (Max size: 5MB)<br />
+          Examples: Utility bill, Bank statement (not older than 3 months)
         </small>
       </div>
 
@@ -137,25 +101,24 @@ const DocumentUpload = ({ formData, onChange }) => {
           onChange={handleTaxIdChange}
           placeholder="XXX-XX-XXXX"
           maxLength="11"
-          required
+          className={errors?.taxId ? 'error' : ''}
         />
-        {errors.taxId && (
-          <span className="error-message">{errors.taxId}</span>
+        {errors?.taxId && (
+          <div className="error-message">{errors.taxId}</div>
         )}
         <small>
-          For US citizens, please enter your Social Security Number (SSN)<br />
-          Format: XXX-XX-XXXX
+          For US citizens, please enter your Social Security Number (SSN)
         </small>
       </div>
 
       <div className="document-guidelines">
-        <h3>Document Guidelines:</h3>
+        <h3>Document Requirements:</h3>
         <ul>
-          <li>All documents must be current and not expired</li>
-          <li>Images must be clear and in color</li>
-          <li>All four corners of the document must be visible</li>
-          <li>No blurry or obscured information</li>
-          <li>Files must not exceed 5MB in size</li>
+          <li>Files must be clear and legible</li>
+          <li>All document corners must be visible</li>
+          <li>Documents must be valid and not expired</li>
+          <li>Address proof must be recent (within 3 months)</li>
+          <li>Maximum file size: 5MB per document</li>
         </ul>
       </div>
     </div>
