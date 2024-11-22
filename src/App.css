@@ -1,3 +1,33 @@
+/* Base styles */
+.App {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 1rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+main {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+footer {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  margin-top: 2rem;
+}
 
 /* KYC Form Styles */
 .kyc-container {
@@ -56,12 +86,19 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  text-align: left;
+}
+
+.form-step h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .form-group label {
@@ -110,11 +147,19 @@
   opacity: 0.9;
 }
 
+/* Summary styles */
 .summary-section {
   background: #f5f5f5;
   padding: 1rem;
   border-radius: 4px;
   margin-top: 1rem;
+}
+
+.summary-section h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .summary-item {
@@ -128,4 +173,70 @@
   color: #d32f2f;
   font-size: 0.875rem;
   margin-top: 0.25rem;
+}
+
+/* File preview styles */
+.file-preview {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.file-preview img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.25rem;
+  background: white;
+}
+
+/* Document guidelines styles */
+.document-guidelines {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  border-left: 4px solid #61dafb;
+}
+
+.document-guidelines h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.document-guidelines ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.5rem;
+}
+
+.document-guidelines li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.form-group small {
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .kyc-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .button-group {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+
+  .button {
+    width: 100%;
+  }
 }
