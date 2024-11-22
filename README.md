@@ -48,19 +48,33 @@ The application will open in your default browser at `http://localhost:3000`
 ## Project Structure
 kyc-form-application/
 ├── public/
+
 ├── src/
+
 │ ├── components/
+
 │ │ └── KYCForm/
+
 │ │ ├── KYCForm.js
+
 │ │ ├── PersonalInfo.js
+
 │ │ ├── AddressInfo.js
+
 │ │ ├── DocumentUpload.js
+
 │ │ ├── Summary.js
+
 │ │ └── ProgressBar.js
+
 │ ├── App.js
+
 │ ├── App.css
+
 │ └── index.js
+
 ├── package.json
+
 └── README.md
 
 
