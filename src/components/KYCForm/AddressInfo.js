@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddressInfo = ({ formData, onChange }) => {
+const AddressInfo = ({ formData, onChange, errors }) => {
     const countries = [
         'United States', 'Canada', 'United Kingdom',
         'Australia', 'Germany', 'France', 'Japan'
@@ -17,36 +17,45 @@ const AddressInfo = ({ formData, onChange }) => {
                     id="street"
                     value={formData.street}
                     onChange={(e) => onChange('street', e.target.value)}
-                    required
+                    className={errors?.street ? 'error' : ''}
                 />
+                {errors?.street && (
+                    <div className="error-message">{errors.street}</div>
+                )}
             </div>
             <div className="form-group">
-                <label htmlFor="city">City </label>
+                <label htmlFor="city">City *</label>
                 <input
                     type="text"
                     id="city"
                     value={formData.city}
                     onChange={(e) => onChange('city', e.target.value)}
-                    required
+                    className={errors?.city ? 'error' : ''}
                 />
+                {errors?.city && (
+                    <div className="error-message">{errors.city}</div>
+                )}
             </div>
             <div className="form-group">
-                <label htmlFor="state">State/Province </label>
+                <label htmlFor="state">State/Province *</label>
                 <input
                     type="text"
                     id="state"
                     value={formData.state}
                     onChange={(e) => onChange('state', e.target.value)}
-                    required
+                    className={errors?.state ? 'error' : ''}
                 />
+                {errors?.state && (
+                    <div className="error-message">{errors.state}</div>
+                )}
             </div>
             <div className="form-group">
-                <label htmlFor="country">Country </label>
+                <label htmlFor="country">Country *</label>
                 <select
                     id="country"
                     value={formData.country}
                     onChange={(e) => onChange('country', e.target.value)}
-                    required
+                    className={errors?.country ? 'error' : ''}
                 >
                     <option value="">Select a country</option>
                     {countries.map(country => (
@@ -55,16 +64,22 @@ const AddressInfo = ({ formData, onChange }) => {
                         </option>
                     ))}
                 </select>
+                {errors?.country && (
+                    <div className="error-message">{errors.country}</div>
+                )}
             </div>
             <div className="form-group">
-                <label htmlFor="postalCode">Postal Code </label>
+                <label htmlFor="postalCode">Postal Code *</label>
                 <input
                     type="text"
                     id="postalCode"
                     value={formData.postalCode}
                     onChange={(e) => onChange('postalCode', e.target.value)}
-                    required
+                    className={errors?.postalCode ? 'error' : ''}
                 />
+                {errors?.postalCode && (
+                    <div className="error-message">{errors.postalCode}</div>
+                )}
             </div>
         </div>
     );
