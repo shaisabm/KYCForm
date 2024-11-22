@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PersonalInfo = ({ formData, onChange }) => {
+const PersonalInfo = ({ formData, onChange, errors }) => {
   return (
     <div className="form-step">
       <h2>Personal Information</h2>
@@ -12,8 +12,11 @@ const PersonalInfo = ({ formData, onChange }) => {
           id="firstName"
           value={formData.firstName}
           onChange={(e) => onChange('firstName', e.target.value)}
-          required
+          className={errors?.firstName ? 'error' : ''}
         />
+        {errors?.firstName && (
+          <div className="error-message">{errors.firstName}</div>
+        )}
       </div>
 
       <div className="form-group">
@@ -23,8 +26,11 @@ const PersonalInfo = ({ formData, onChange }) => {
           id="lastName"
           value={formData.lastName}
           onChange={(e) => onChange('lastName', e.target.value)}
-          required
+          className={errors?.lastName ? 'error' : ''}
         />
+        {errors?.lastName && (
+          <div className="error-message">{errors.lastName}</div>
+        )}
       </div>
 
       <div className="form-group">
@@ -34,8 +40,11 @@ const PersonalInfo = ({ formData, onChange }) => {
           id="dateOfBirth"
           value={formData.dateOfBirth}
           onChange={(e) => onChange('dateOfBirth', e.target.value)}
-          required
+          className={errors?.dateOfBirth ? 'error' : ''}
         />
+        {errors?.dateOfBirth && (
+          <div className="error-message">{errors.dateOfBirth}</div>
+        )}
       </div>
 
       <div className="form-group">
@@ -45,8 +54,11 @@ const PersonalInfo = ({ formData, onChange }) => {
           id="email"
           value={formData.email}
           onChange={(e) => onChange('email', e.target.value)}
-          required
+          className={errors?.email ? 'error' : ''}
         />
+        {errors?.email && (
+          <div className="error-message">{errors.email}</div>
+        )}
       </div>
 
       <div className="form-group">
@@ -56,8 +68,11 @@ const PersonalInfo = ({ formData, onChange }) => {
           id="phone"
           value={formData.phone}
           onChange={(e) => onChange('phone', e.target.value)}
-          required
+          className={errors?.phone ? 'error' : ''}
         />
+        {errors?.phone && (
+          <div className="error-message">{errors.phone}</div>
+        )}
       </div>
     </div>
   );
