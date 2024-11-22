@@ -1,70 +1,154 @@
-# Getting Started with Create React App
+# KYC Form Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+A modern, multi-step Know Your Customer (KYC) form application built with React. This application provides a seamless user experience for collecting and validating customer information through a step-by-step process.
 
-## Available Scripts
+## Features
+- 📝 Multi-step form with progress tracking
+- 🔄 Smooth navigation between steps
+- 📱 Responsive design for all devices
+- 📤 Document upload functionality
+- ✅ Real-time validation
+- 👀 Document preview capabilities
+- 📋 Final review and summary page
 
-In the project directory, you can run:
+## Live Demo
+[Add your live demo link here]
 
-### `npm start`
+## Screenshots
+[Add screenshots of your application here]
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
+- React 18.x
+- CSS3
+- File API
+- Modern JavaScript (ES6+)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
+- Node.js (v14.0.0 or higher)
+- npm (v6.0.0 or higher)
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository
+bash
+git clone https://github.com/your-username/kyc-form-application.git
+2. Navigate to the project directory
+bash
+cd kyc-form-application
+3. Install dependencies
+bash
+npm install
+4. Start the development server
+bash
+npm start
 
-### `npm run build`
+The application will open in your default browser at `http://localhost:3000`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Structure
+kyc-form-application/
+├── public/
+├── src/
+│ ├── components/
+│ │ └── KYCForm/
+│ │ ├── KYCForm.js
+│ │ ├── PersonalInfo.js
+│ │ ├── AddressInfo.js
+│ │ ├── DocumentUpload.js
+│ │ ├── Summary.js
+│ │ └── ProgressBar.js
+│ ├── App.js
+│ ├── App.css
+│ └── index.js
+├── package.json
+└── README.md
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Component Overview
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### KYCForm
+The main container component that manages form state and step navigation.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### PersonalInfo
+Collects basic user information including:
+- First Name
+- Last Name
+- Date of Birth
+- Email
+- Phone Number
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### AddressInfo
+Handles residential information including:
+- Street Address
+- City
+- State/Province
+- Country
+- Postal Code
 
-## Learn More
+### DocumentUpload
+Manages document uploads with:
+- ID Document Upload
+- Proof of Address Upload
+- Tax ID Number Input
+- File Preview
+- Validation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Summary
+Provides a comprehensive review of all entered information with edit capabilities.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Features in Detail
 
-### Code Splitting
+### Form Validation
+- Required field validation
+- Email format validation
+- Phone number format validation
+- File type and size validation
+- Tax ID format validation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### File Upload
+- Supports PDF, JPG, and PNG formats
+- Maximum file size: 5MB
+- Preview capability for images
+- PDF document detection
 
-### Analyzing the Bundle Size
+### Progress Tracking
+- Visual progress indicator
+- Step completion status
+- Easy navigation between steps
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Configuration
 
-### Making a Progressive Web App
+### File Upload Limits
+You can modify the file upload limits in `DocumentUpload.js`:
+const MAX_FILE_SIZE = 5 1024 1024; // 5MB
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'application/pdf'];
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Contributing
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-### Advanced Configuration
+## Future Enhancements
+- [ ] Add form data persistence
+- [ ] Implement backend integration
+- [ ] Add multi-language support
+- [ ] Enhance accessibility features
+- [ ] Add unit tests
+- [ ] Implement form analytics
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-### Deployment
+## Acknowledgments
+- [React Documentation](https://reactjs.org/)
+- [File API Documentation](https://developer.mozilla.org/en-US/docs/Web/API/File_API)
+- [Alpaca Markets API Documentation](https://docs.alpaca.markets/reference/createaccount)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Contact
+Your Name - [your.email@example.com](mailto:your.email@example.com)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Project Link: [https://github.com/your-username/kyc-form-application](https://github.com/your-username/kyc-form-application)
